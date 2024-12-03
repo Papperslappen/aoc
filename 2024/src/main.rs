@@ -2,10 +2,13 @@ use clap::Parser;
 use std::io;
 
 mod dec01;
+mod dec02;
+
+mod dec03;
 
 #[derive(Parser, Debug)]
 struct Args {
-    #[arg(short, long, default_value_t = 1)]
+    #[arg(short, long, default_value_t = 3)]
     date: u8,
 }
 
@@ -13,6 +16,8 @@ fn main() {
     let args = Args::parse();
     let result = match args.date {
         1 => dec01::solution(read_input()),
+        2 => dec02::solution(read_input()),
+        3 => dec03::solution(read_input()),
         _ => {
             panic!()
         }

@@ -26,8 +26,16 @@ pub(crate) fn solution(input: Vec<String>) -> (i64, i64) {
         .sum();
 
     //solution B
-    let r = right_sorted.iter().dedup_with_count().map(|(count,value)|(*value,count as i64)).collect::<HashMap<_,_>>();
-    let result_b= left_sorted.iter().dedup_with_count().map(|(count,value)| *value*(count as i64)*r.get(value).unwrap_or(&0)).sum();
+    let r = right_sorted
+        .iter()
+        .dedup_with_count()
+        .map(|(count, value)| (*value, count as i64))
+        .collect::<HashMap<_, _>>();
+    let result_b = left_sorted
+        .iter()
+        .dedup_with_count()
+        .map(|(count, value)| *value * (count as i64) * r.get(value).unwrap_or(&0))
+        .sum();
     (result_a, result_b)
 }
 
