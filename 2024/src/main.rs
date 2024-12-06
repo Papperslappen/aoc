@@ -3,12 +3,12 @@ use std::io;
 
 mod dec01;
 mod dec02;
-
 mod dec03;
+mod dec04;
 
 #[derive(Parser, Debug)]
 struct Args {
-    #[arg(short, long, default_value_t = 3)]
+    #[arg(short, long, default_value_t = 4)]
     date: u8,
 }
 
@@ -18,6 +18,7 @@ fn main() {
         1 => dec01::solution(read_input()),
         2 => dec02::solution(read_input()),
         3 => dec03::solution(read_input()),
+        4 => dec04::solution(read_input()),
         _ => {
             panic!()
         }
