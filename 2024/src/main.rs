@@ -6,10 +6,12 @@ mod dec02;
 mod dec03;
 mod dec04;
 mod dec05;
+mod dec06;
+mod dec07;
 
 #[derive(Parser, Debug)]
 struct Args {
-    #[arg(short, long, default_value_t = 5)]
+    #[arg(short, long, default_value_t = 6)]
     date: u8,
 }
 
@@ -21,6 +23,8 @@ fn main() {
         3 => dec03::solution(read_input()),
         4 => dec04::solution(read_input()),
         5 => dec05::solution(read_input()),
+        6 => dec06::solution(read_input()),
+        7 => dec07::solution(read_input()),
         _ => {
             panic!()
         }
