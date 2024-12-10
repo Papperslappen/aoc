@@ -1,5 +1,5 @@
 use clap::Parser;
-use std::io;
+use std::{io, time::Instant};
 
 mod dec01;
 mod dec02;
@@ -11,12 +11,13 @@ mod dec07;
 
 #[derive(Parser, Debug)]
 struct Args {
-    #[arg(short, long, default_value_t = 6)]
+    #[arg(short, long, default_value_t = 7)]
     date: u8,
 }
 
 fn main() {
     let args = Args::parse();
+    let now = Instant::now();
     let result = match args.date {
         1 => dec01::solution(read_input()),
         2 => dec02::solution(read_input()),
@@ -29,7 +30,9 @@ fn main() {
             panic!()
         }
     };
+    let time = now.elapsed();
     println!("Result A: {} \n Result B: {}", result.0, result.1);
+    println!("It took {} ms",time.as_millis());
 }
 
 fn read_input() -> Vec<String> {
