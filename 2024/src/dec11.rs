@@ -1,13 +1,19 @@
 use std::collections::HashMap;
 
+fn split(v: u64) -> (u64, u64) {
+    let nd = (v as f64).log10() as usize + 1;
+    let p = 10_u32.pow(nd as u32 / 2) as u64;
+    let l = v / p;
+    let r = v % p;
+    (l, r)
+}
+
 fn numberwang(number: u64) -> Vec<u64> {
     if number == 0 {
         vec![1]
     } else if number.to_string().len() % 2 == 0 {
-        let num = number.to_string();
-        let len = num.len();
-        let (num1, num2) = num.split_at(len / 2);
-        vec![num1.parse().unwrap(), num2.parse().unwrap()]
+        let (num1,num2)=split(number);
+        vec![num1, num2]
     } else {
         vec![number * 2024]
     }
@@ -30,7 +36,6 @@ fn backward_blink(stones: Vec<u64>, blinks: usize) -> usize {
     let mut sum = 0;
     while let Some((stone, blinks_left)) = stones.pop() {
         if let Some(stone_count) = memory.get(&(stone, blinks_left)) {
-            println!("cache hit! stone: {} blinks left: {}", stone, blinks_left);
             sum += stone_count;
         } else if blinks_left == 0 {
             sum += 1;
