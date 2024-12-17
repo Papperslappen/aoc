@@ -12,7 +12,7 @@ fn numberwang(number: u64) -> Vec<u64> {
     if number == 0 {
         vec![1]
     } else if number.to_string().len() % 2 == 0 {
-        let (num1,num2)=split(number);
+        let (num1, num2) = split(number);
         vec![num1, num2]
     } else {
         vec![number * 2024]
@@ -41,17 +41,25 @@ fn backward_blink(stones: Vec<u64>, blinks: usize) -> usize {
             sum += 1;
         } else {
             let blinks = blinks_left.min(5);
-            let new_stones = forward_blink(stone,blinks, &mut memory);
-            if new_stones.iter().all(|stone| memory.contains_key(&(*stone,blinks_left-blinks))){
-                let score = new_stones.into_iter().map(|stone|memory.get(&(stone,blinks_left-blinks)).unwrap()).sum();
+            let new_stones = forward_blink(stone, blinks, &mut memory);
+            if new_stones
+                .iter()
+                .all(|stone| memory.contains_key(&(*stone, blinks_left - blinks)))
+            {
+                let score = new_stones
+                    .into_iter()
+                    .map(|stone| memory.get(&(stone, blinks_left - blinks)).unwrap())
+                    .sum();
                 sum += score;
-                memory.insert((stone,blinks_left),score);
-            }else{
-                new_stones.into_iter().for_each(|stone| stones.push((stone,blinks_left-blinks)));
+                memory.insert((stone, blinks_left), score);
+            } else {
+                new_stones
+                    .into_iter()
+                    .for_each(|stone| stones.push((stone, blinks_left - blinks)));
             }
         }
     }
-    println!("memory size: {}",memory.len());
+    println!("memory size: {}", memory.len());
     sum
 }
 
